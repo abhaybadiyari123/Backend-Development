@@ -1,2 +1,0 @@
-Add the DevTools screenshot here with this name:
-request-response-cycle.png
