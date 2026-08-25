@@ -1,14 +1,9 @@
 {
-  "name": "session-cookie-demo",
+  "name": "experiment-7",
   "version": "1.0.0",
-  "description": "Node.js Session and Cookie Demo",
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js"
-  },
   "dependencies": {
-    "cookie-parser": "^1.4.7",
     "express": "^4.19.2",
-    "express-session": "^1.18.1"
+    "express-session": "^1.18.1",
+    "cookie-parser": "^1.4.7"
   }
 }
