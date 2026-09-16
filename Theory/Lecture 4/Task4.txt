@@ -1,0 +1,8 @@
+Browser:
+http://localhost:3000/students/2
+
+curl:
+curl -i http://localhost:3000/students/2
+
+Postman:
+GET http://localhost:3000/students/2
