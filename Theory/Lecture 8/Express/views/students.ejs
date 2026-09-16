@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student List</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <h1>Students</h1>
+  <% if (students.length === 0) { %>
+    <p>No students found.</p>
+  <% } else { %>
+    <p>Total students: <%= students.length %></p>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Branch</th>
+      </tr>
+      <% students.forEach((student, index) => { %>
+        <tr class="<%= index % 2 === 0 ? 'even-row' : 'odd-row' %>">
+          <td><%= student.id %></td>
+          <td><%= student.name %></td>
+          <td><%= student.branch %></td>
+        </tr>
+      <% }) %>
+    </table>
+  <% } %>
+</body>
+</html>

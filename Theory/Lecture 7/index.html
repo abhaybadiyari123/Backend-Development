@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notes App</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; }
+    .input-row { display: flex; gap: 10px; margin-bottom: 20px; }
+    #noteInput { flex: 1; padding: 10px; }
+    button { padding: 10px 14px; cursor: pointer; }
+    .note-card { border: 1px solid #ccc; border-radius: 8px; padding: 15px; margin-bottom: 12px; }
+    .note-card p { margin-top: 0; }
+    .meta { font-size: 12px; color: #666; }
+  </style>
+</head>
+<body>
+  <h1>Notes App</h1>
+
+  <div class="input-row">
+    <input type="text" id="noteInput" placeholder="Type a note...">
+    <button onclick="handleAddNote()">Add Note</button>
+  </div>
+
+  <div id="notesList"></div>
+
+  <script>
+    function getNotes() {
+      const raw = localStorage.getItem("notes");
+      return raw ? JSON.parse(raw) : [];
+    }
+
+    function saveNotes(notes) {
+      localStorage.setItem("notes", JSON.stringify(notes));
+    }
+
+    function addNote(text) {
+      if (!text.trim()) return;
+
+      const notes = getNotes();
+      notes.push({
+        id: Date.now(),
+        text: text,
+        completed: false,
+        createdAt: new Date().toISOString(),
+        updatedAt: null
+      });
+
+      saveNotes(notes);
+      renderNotes();
+    }
+
+    function updateNote(id, newText) {
+      if (!newText.trim()) return;
+
+      const notes = getNotes();
+      const note = notes.find(n => n.id === id);
+
+      if (note) {
+        note.text = newText;
+        note.updatedAt = new Date().toISOString();
+        saveNotes(notes);
+        renderNotes();
+      }
+    }
+
+    function deleteNote(id) {
+      const notes = getNotes().filter(n => n.id !== id);
+      saveNotes(notes);
+      renderNotes();
+    }
+
+    function editNote(id) {
+      const notes = getNotes();
+      const note = notes.find(n => n.id === id);
+      if (!note) return;
+
+      const newText = prompt("Edit note:", note.text);
+      if (newText !== null) {
+        updateNote(id, newText);
+      }
+    }
+
+    function handleAddNote() {
+      const input = document.getElementById("noteInput");
+      addNote(input.value);
+      input.value = "";
+      input.focus();
+    }
+
+    function renderNotes() {
+      const container = document.getElementById("notesList");
+      const notes = getNotes();
+
+      if (notes.length === 0) {
+        container.innerHTML = "<p>No notes yet.</p>";
+        return;
+      }
+
+      container.innerHTML = notes.map(note => `
+        <div class="note-card">
+          <p>${escapeHtml(note.text)}</p>
+          <p class="meta">Created: ${new Date(note.createdAt).toLocaleString()}</p>
+          ${note.updatedAt ? `<p class="meta">Updated: ${new Date(note.updatedAt).toLocaleString()}</p>` : ""}
+          <button onclick="editNote(${note.id})">Edit</button>
+          <button onclick="deleteNote(${note.id})">Delete</button>
+        </div>
+      `).join("");
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement("div");
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    document.getElementById("noteInput").addEventListener("keydown", function(event) {
+      if (event.key === "Enter") handleAddNote();
+    });
+
+    window.onload = renderNotes;
+  </script>
+</body>
+</html>
