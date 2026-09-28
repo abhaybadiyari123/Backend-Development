@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Notes</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="container">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">BACKEND LAB</p>
+        <h1>My Notes</h1>
+        <p class="subtitle">Express + EJS + MongoDB</p>
+      </div>
+      <a class="button" href="/notes/new">+ Add Note</a>
+    </header>
+
+    <% if (notes.length === 0) { %>
+      <section class="empty">
+        <h2>No notes available</h2>
+        <p>Create your first note to store it in MongoDB.</p>
+      </section>
+    <% } else { %>
+      <section class="grid">
+        <% notes.forEach(note => { %>
+          <article class="card">
+            <div class="card-head">
+              <span class="category"><%= note.category %></span>
+              <span class="date"><%= new Date(note.createdAt).toLocaleString() %></span>
+            </div>
+            <h2><%= note.title %></h2>
+            <p class="content"><%= note.content %></p>
+            <form action="/notes/<%= note._id %>/delete" method="POST" onsubmit="return confirm('Delete this note?')">
+              <button class="delete" type="submit">Delete</button>
+            </form>
+          </article>
+        <% }) %>
+      </section>
+    <% } %>
+  </main>
+</body>
+</html>

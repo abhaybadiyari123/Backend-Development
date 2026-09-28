@@ -1,0 +1,15 @@
+{
+  "name": "my-notes-express",
+  "version": "1.0.0",
+  "description": "Backend Development Lab - Notes Management Application using Express, EJS and MongoDB",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "mongodb": "^6.20.0",
+    "mongoose": "^9.10.2"
+  }
+}

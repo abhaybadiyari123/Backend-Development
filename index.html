@@ -1,64 +1,337 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Backend-Development</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backend Development Portfolio | Abhay Singh</title>
     <style>
+        :root {
+            --primary: #0969da;
+            --primary-hover: #0550ae;
+            --bg: #f6f8fa;
+            --card-bg: #ffffff;
+            --text-main: #1f2328;
+            --text-muted: #656d76;
+            --border: #d0d7de;
+            --tag-lab: #ddf4ff;
+            --tag-lab-text: #0969da;
+            --tag-theory: #dafbe1;
+            --tag-theory-text: #1a7f37;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
             line-height: 1.6;
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 0 20px;
-            color: #24292f;
+            padding: 40px 20px;
         }
+
+        .container {
+            max-width: 860px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 32px;
+            box-shadow: 0 1px 3px rgba(31, 35, 40, 0.08);
+        }
+
         h1 {
-            border-bottom: 1px solid #d0d7de;
-            padding-bottom: 0.3em;
-            font-size: 2.25em;
-            font-weight: 600;
-        }
-        h2 {
-            margin-top: 24px;
-            border-bottom: 1px solid #d0d7de;
-            padding-bottom: 0.3em;
-            font-size: 1.5em;
-            font-weight: 600;
-        }
-        ul {
-            padding-left: 2em;
-        }
-        li {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--text-main);
             margin-bottom: 8px;
         }
-        a {
-            color: #0969da;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        .meta {
-            color: #57606a;
-            font-size: 1.1em;
+
+        .meta-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            font-size: 1rem;
+            color: var(--text-muted);
             margin-bottom: 20px;
+        }
+
+        .meta-item strong {
+            color: var(--text-main);
+        }
+
+        .header-links {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border);
+        }
+
+        .btn-outline:hover {
+            background-color: #f3f4f6;
+        }
+
+        section {
+            margin-bottom: 36px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 8px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 16px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(31, 35, 40, 0.1);
+            border-color: var(--primary);
+        }
+
+        .card-top {
+            margin-bottom: 14px;
+        }
+
+        .tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            padding: 3px 8px;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .tag-lab {
+            background-color: var(--tag-lab);
+            color: var(--tag-lab-text);
+        }
+
+        .tag-theory {
+            background-color: var(--tag-theory);
+            color: var(--tag-theory-text);
+        }
+
+        .card h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 6px;
+        }
+
+        .card p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+        }
+
+        .card-footer {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 48px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
         }
     </style>
 </head>
 <body>
-    <h1>Backend-Development</h1>
-    <p class="meta">590011786</p>
+    <div class="container">
+        <header>
+            <h1>Backend Development</h1>
+            <div class="meta-info">
+                <div class="meta-item">Student: <strong>Abhay Singh</strong></div>
+                <div class="meta-item">Roll No: <strong>590011786</strong></div>
+                <div class="meta-item">Course: <strong>Backend Development</strong></div>
+            </div>
+            <div class="header-links">
+                <a href="https://github.com/abhaybadiyari123/Backend-Development" target="_blank" class="btn btn-primary">
+                    View GitHub Repository
+                </a>
+                <a href="https://github.com/abhaybadiyari123" target="_blank" class="btn btn-outline">
+                    GitHub Profile
+                </a>
+            </div>
+        </header>
 
-    <h2>Lab Work</h2>
-    <ul>
-        <li><a href="./Lab/Experiment 1/index.html">Experiment 1</a></li>
-        <li><a href="https://github.com/abhaybadiyari123/Backend-Development/tree/main/Lab/Experiment%2012" target="_blank">Experiment 12</a></li>
-        <li><a href="https://github.com/abhaybadiyari123/Backend-Development/tree/main/Lab/Experiment%2012B" target="_blank">Experiment 12B</a></li>
-    </ul>
+        <!-- Lab Work Section -->
+        <section>
+            <div class="section-header">
+                <h2>🧪 Lab Work</h2>
+            </div>
+            <div class="grid">
+                <a href="./Lab/Experiment 1/index.html" class="card">
+                    <div class="card-top">
+                        <span class="tag tag-lab">Live Demo</span>
+                        <h3>Experiment 1</h3>
+                        <p>HTML5 webpage structure, semantics, media tags, and styling.</p>
+                    </div>
+                    <div class="card-footer">Open Webpage &rarr;</div>
+                </a>
 
-    <h2>Theory Work</h2>
-    <ul>
-        <li><a href="https://github.com/abhaybadiyari123/Backend-Development/tree/main/Theory/Lecture" target="_blank">Lecture</a></li>
-    </ul>
+                <a href="https://github.com/abhaybadiyari123/Backend-Development/tree/main/Lab/Experiment%2012" target="_blank" class="card">
+                    <div class="card-top">
+                        <span class="tag tag-lab">Code</span>
+                        <h3>Experiment 12</h3>
+                        <p>Express.js server setup, template views, and routing architecture.</p>
+                    </div>
+                    <div class="card-footer">View Code on GitHub &rarr;</div>
+                </a>
+
+                <a href="https://github.com/abhaybadiyari123/Backend-Development/tree/main/Lab/Experiment%2012B" target="_blank" class="card">
+                    <div class="card-top">
+                        <span class="tag tag-lab">Code</span>
+                        <h3>Experiment 12B</h3>
+                        <p>Updated experiment architecture and modular folder structure.</p>
+                    </div>
+                    <div class="card-footer">View Code on GitHub &rarr;</div>
+                </a>
+
+                <a href="https://github.com/abhaybadiyari123/Backend-Development/tree/main/Lab/Experiment%2013A" target="_blank" class="card">
+                    <div class="card-top">
+                        <span class="tag tag-lab">New Code</span>
+                        <h3>Experiment 13A</h3>
+                        <p>MongoDB and Mongoose integration demo with REST endpoints.</p>
+                    </div>
+                    <div class="card-footer">View Code on GitHub &rarr;</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Theory Work Section -->
+        <section>
+            <div class="section-header">
+                <h2>📚 Theory Work</h2>
+            </div>
+            <div class="grid">
+                <a href="https://github.com/abhaybadiyari123/Backend-Development/tree/main/Theory/Lecture" target="_blank" class="card">
+                    <div class="card-top">
+                        <span class="tag tag-theory">Foundation</span>
+                        <h3>Lecture (Tasks 1–7)</h3>
+                        <p>Core backend exercises, tasks 1 through 7, and lab modifications.</p>
+                    </div>
+                    <div class="card-footer">View on GitHub &rarr;</div>
+                </a>
+
+                <a href="https://github.com/abhaybadiyari123/Backend-Development/tree/main/Theory/Lecture%204" target="_blank" class="card">
+                    <div class="card-top">
+                        <span class="tag tag-theory">Lecture 4</span>
+                        <h3>Lecture 4</h3>
+                        <p>Express.js server implementation and backend tasks.</p>
+                    </div>
+                    <div class="card-footer">View on GitHub &rarr;</div>
+                </a>
+
+                <a href="https://github.com/abhaybadiyari123/Backend-Development/tree/main/Theory/Lecture%205" target="_blank" class="card">
+                    <div class="card-top">
+                        <span class="tag tag-theory">Lecture 5</span>
+                        <h3>Lecture 5</h3>
+                        <p>Advanced backend logic, middleware, and request handling.</p>
+                    </div>
+                    <div class="card-footer">View on GitHub &rarr;</div>
+                </a>
+
+                <a href="https://github.com/abhaybadiyari123/Backend-Development/tree/main/Theory/Lecture%206" target="_blank" class="card">
+                    <div class="card-top">
+                        <span class="tag tag-theory">Lecture 6</span>
+                        <h3>Lecture 6</h3>
+                        <p>Server architecture, controllers, and route handling.</p>
+                    </div>
+                    <div class="card-footer">View on GitHub &rarr;</div>
+                </a>
+
+                <a href="https://github.com/abhaybadiyari123/Backend-Development/tree/main/Theory/Lecture%207" target="_blank" class="card">
+                    <div class="card-top">
+                        <span class="tag tag-theory">Lecture 7</span>
+                        <h3>Lecture 7</h3>
+                        <p>RESTful APIs, data validation, and asynchronous flow.</p>
+                    </div>
+                    <div class="card-footer">View on GitHub &rarr;</div>
+                </a>
+
+                <a href="https://github.com/abhaybadiyari123/Backend-Development/tree/main/Theory/Lecture%208" target="_blank" class="card">
+                    <div class="card-top">
+                        <span class="tag tag-theory">Lecture 8</span>
+                        <h3>Lecture 8</h3>
+                        <p>Database modeling, schemas, and persistence layer.</p>
+                    </div>
+                    <div class="card-footer">View on GitHub &rarr;</div>
+                </a>
+            </div>
+        </section>
+
+        <footer>
+            <p>Backend Development Academic Portfolio • Abhay Singh (590011786)</p>
+        </footer>
+    </div>
 </body>
 </html>

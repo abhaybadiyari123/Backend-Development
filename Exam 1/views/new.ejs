@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Note | My Notes</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="container narrow">
+    <a class="back" href="/">← Back to notes</a>
+    <section class="form-card">
+      <p class="eyebrow">NEW NOTE</p>
+      <h1>Add a Note</h1>
+      <% if (typeof error !== "undefined") { %>
+        <p class="error"><%= error %></p>
+      <% } %>
+      <form action="/notes" method="POST">
+        <label for="title">Title</label>
+        <input id="title" name="title" type="text" placeholder="e.g. Backend Viva" required>
+
+        <label for="content">Content</label>
+        <textarea id="content" name="content" rows="7" placeholder="Write your note..." required></textarea>
+
+        <label for="category">Category</label>
+        <input id="category" name="category" type="text" placeholder="e.g. Study">
+
+        <button class="button full" type="submit">Save Note</button>
+      </form>
+    </section>
+  </main>
+</body>
+</html>
